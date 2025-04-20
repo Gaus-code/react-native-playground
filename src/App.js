@@ -5,13 +5,7 @@ import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 import Header from './components/Header';
 import BottomMenu from './components/BottomMenu';
 import BookingScreen from './screens/BookingScreen';
-
-const SCREEN_TITLES = {
-  calendar: 'Календарь бронирований',
-  projects: 'Проекты',
-  chat: 'Чат',
-  profile: 'Профиль'
-};
+import SCREEN_TITLES from './constants/screenTitles';
 
 const App = () => {
   const [selectedDate, setSelectedDate] = useState(null);
