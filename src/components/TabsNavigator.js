@@ -4,6 +4,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import Header from './Header';
 import SCREEN_TITLES from '../constants/screenTitles';
+import { Icon } from '../utils/Icon';
 
 const Tab = createBottomTabNavigator();
 
@@ -41,13 +42,15 @@ const TabsNavigator = ({ screens, setActiveScreen = () => {} }) => {
               ? {
                   tabBarButton: (props) => (
                     <CustomTabButton {...props}>
-                      <MaterialIcons name="add-circle" size={40} color="#4DC591" />
+                      <Icon name="add-circle" size={40} color={'#4DC591'} />
                     </CustomTabButton>
                   ),
                 }
               : {
                   tabBarIcon: ({ color }) => (
-                    <MaterialIcons name={screen.icon} size={24} color={color} />
+                    <Icon name={`${screen.name}`} 
+                    size={24} 
+                    color={color} />
                   ),
                 }
           }

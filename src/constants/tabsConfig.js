@@ -1,5 +1,6 @@
 import { View, Text } from 'react-native';
 import { BookingScreenWrapper } from '../screens/BookingScreen';
+import { Icon } from '../utils/Icon';
 
 export const tabsConfig = (props) => [
     {
@@ -9,7 +10,11 @@ export const tabsConfig = (props) => [
     },
     {
       name: 'projects',
-      component: () => <Text style={{ padding: 20 }}>Проекты - скоро появится</Text>,
+      component: () =>
+      <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 200 }}>
+        <Text style={{ padding: 20, alignSelf: 'center' }}>Проекты - скоро появятся</Text>
+        <Icon name={'projects'} size={140} color={'grey'} />
+      </View>,
       icon: 'work'
     },
     {
@@ -19,12 +24,20 @@ export const tabsConfig = (props) => [
     },
     {
       name: 'chat',
-      component: () => <Text style={{ padding: 20 }}>Чат - скоро появится</Text>,
+      component: () =>
+      <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 200 }}>
+        <Text style={{ padding: 20, alignSelf: 'center' }}>Чаты - скоро появятся</Text>
+        <Icon name={'chat'} size={140} color={'grey'} />
+      </View>,
       icon: 'chat'
     },
     {
       name: 'profile',
-      component: () => <Text style={{ padding: 20 }}>Профиль - скоро появится</Text>,
+      component: () =>
+      <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 200 }}>
+        <Text style={{ padding: 20, alignSelf: 'center' }}>Профиль - скоро появится</Text>
+        <Icon name={'profile'} size={140} color={'grey'} />
+      </View>,
       icon: 'person'
     }
 ];

@@ -1,13 +1,14 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { Icon } from '../utils/Icon';
 
 const Header = ({ title }) => {
     return (
       <View style={styles.container}>
-        <MaterialIcons name="menu" size={24} color="black" />
+        <Icon name="menu" size={26} color="grey" />
         <Text style={styles.title}>{title}</Text>
-        <MaterialIcons name="notifications" size={24} color="black" />
+        <Icon name="notifications" size={24} color="grey" />
       </View>
     );
 };
