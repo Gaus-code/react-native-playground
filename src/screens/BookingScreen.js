@@ -58,6 +58,35 @@ const BookingScreen = ({
   );
 };
 
+const BookingScreenWrapper = ({
+    selectedDate,
+    setSelectedDate,
+    isPopupVisible,
+    setPopupVisible,
+    bookings,
+    handleAddBooking
+  }) => {
+    return (
+      <>
+        <BookingScreen
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
+          bookings={bookings}
+          isPopupVisible={isPopupVisible}
+          setPopupVisible={setPopupVisible}
+          handleAddBooking={handleAddBooking}
+        />
+        {isPopupVisible && (
+          <BookingPopup
+            selectedDate={selectedDate ? selectedDate.toISOString().split('T')[0] : null}
+            onAddBooking={handleAddBooking}
+            onClose={() => setPopupVisible(false)}
+          />
+        )}
+      </>
+    );
+  };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -74,4 +103,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BookingScreen;
+export {
+    BookingScreen,
+    BookingScreenWrapper
+};

@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
-import Header from './components/Header';
-import BottomMenu from './components/BottomMenu';
-import BookingScreen from './screens/BookingScreen';
-import SCREEN_TITLES from './constants/screenTitles';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+
+import TabsNavigator from './components/TabsNavigator';
+
+import { tabsConfig } from './constants/tabsConfig';
+
+const Tab = createBottomTabNavigator();
 
 const App = () => {
   const [selectedDate, setSelectedDate] = useState(null);
@@ -18,47 +22,52 @@ const App = () => {
     setPopupVisible(false);
   };
 
-  const renderContent = () => {
-    switch(activeScreen) {
-      case 'projects':
-        return <Text style={{ padding: 20 }}>Проекты - скоро появится</Text>;
-      case 'chat':
-        return <Text style={{ padding: 20 }}>Чат - скоро появится</Text>;
-      case 'profile':
-        return <Text style={{ padding: 20 }}>Профиль - скоро появится</Text>;
-      case 'calendar':
-      default:
-        return (
-          <BookingScreen
-            selectedDate={selectedDate}
-            setSelectedDate={setSelectedDate}
-            isPopupVisible={isPopupVisible}
-            setPopupVisible={setPopupVisible}
-            bookings={bookings}
-            handleAddBooking={handleAddBooking}
-          />
-        );
-    }
-  };
-
   return (
     <SafeAreaProvider>
       <PaperProvider>
-        <SafeAreaView style={{ flex: 1 }}>
-          <Header title={SCREEN_TITLES[activeScreen] || SCREEN_TITLES.calendar} />
-          
-          <View style={{ flex: 1 }}>
-            {renderContent()}
-          </View>
-          
-          <BottomMenu 
-            activeScreen={activeScreen} 
-            setActiveScreen={setActiveScreen} 
-          />
-        </SafeAreaView>
+        <NavigationContainer>
+          <SafeAreaView style={{ flex: 1 }}>
+            <TabsNavigator 
+              screens={tabsConfig({
+                selectedDate,
+                setSelectedDate,
+                isPopupVisible,
+                setPopupVisible,
+                bookings,
+                handleAddBooking
+              })}
+              activeScreen={activeScreen}
+              setActiveScreen={setActiveScreen}
+            />
+          </SafeAreaView>
+        </NavigationContainer>
       </PaperProvider>
     </SafeAreaProvider>
   );
 };
+
+const styles = StyleSheet.create({
+  tabBar: {
+    position: 'absolute',
+    borderTopWidth: 1,
+    borderTopColor: '#eee',
+    backgroundColor: 'white',
+    height: 60,
+  },
+  centerButton: {
+    top: -20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  centerButtonInner: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 5,
+  },
+});
 
 export default App;
